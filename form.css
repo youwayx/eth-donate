@@ -1,0 +1,11 @@
+.tip-button {
+  width: 1200px;
+  height: 500px;
+  background-size: 100%;
+  background-image: url('button.png');
+  cursor: pointer;
+}
+
+.tip-button:hover {
+  background-image: url('button-pressed.png');
+}

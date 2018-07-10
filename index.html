@@ -1,0 +1,50 @@
+<div class="tip-button"></div>
+<div class="message"></div>
+
+<style>
+.tip-button {
+  width: 120px;
+  height: 50px;
+  background-size: 100%;
+  background-image: url('button.png');
+  cursor: pointer;
+}
+
+.tip-button:hover {
+  background-image: url('button-pressed.png');
+}
+
+.message {
+  font-size: 8px;
+  font-family: Helvetica, sans-serif;
+}
+</style>
+
+<script>
+const tipButton = document.querySelector('.tip-button');
+const YOUR_ADDRESS = '0x';
+tipButton.addEventListener('click', function() {
+  if (typeof web3 === 'undefined') {
+    return renderMessage(
+      'Please install <a href="https://metamask.io">metamask</a> to donate.'
+    );
+  }
+
+  var user_address = web3.eth.accounts[0];
+  web3.eth.sendTransaction(
+    {
+      to: YOUR_ADDRESS,
+      from: user_address
+    },
+    function(err, transactionHash) {
+      if (err) return renderMessage('Error!');
+      renderMessage('Thank you for donating! <3');
+    }
+  );
+});
+
+function renderMessage(message) {
+  var messageEl = document.querySelector('.message');
+  messageEl.innerHTML = message;
+}
+</script>
